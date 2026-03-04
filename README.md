@@ -34,5 +34,9 @@ $$
 2.  **趨勢預測**：根據當前增長率與競爭壓力，預測市場將趨於「動態共存」或「單一壟斷」。
 
 
+### 📫 聯繫方式 (Contact Info)
+* **GitHub**: [[你的 GitHub 連結](https://github.com/chenshun910330)]
+* **Email**: [David910330D1d1d1d150@gmail.com]
+* **Phone**: 0965447093
 ---
 **林辰訓 (Lin Chen-xun)** 數學系 
