@@ -1,0 +1,714 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Based on the "beamer-greek-two" template provided 
+%% by the Laboratory of Computational Mathematics, 
+%% Mathematical Software and Digital Typography, 
+%% Department of Mathematics, University of the Aegean
+%% (http://myria.math.aegean.gr/labs/dt/)
+%%
+%% Adapted by John Liaperdos, October-November 2014
+%% (ioannis.liaperdos@gmail.com)
+%%
+%% Last update: 22/06/2017 (English Support)
+%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{naturalnames}{hyperref}
+\documentclass[utf8]{beamer} 
+%\usepackage{babel}
+%\usepackage[utf8]{inputenc}
+
+
+%%% FONT SELECTION %%%%%%%%%%%%%%%%%
+%%% we choose a sans font %%%%%%%%%%
+\usepackage{kmath,kerkis} 
+%\usepackage[default]{gfsneohellenic} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{epstopdf}
+\usepackage{graphicx}
+\usepackage{xeCJK}  %%李：設定中文
+\setCJKmainfont{Noto Serif CJK SC}  %%李：設定字體
+\setCJKmonofont{Noto Serif CJK SC}
+\XeTeXlinebreaklocale "zh" %文字間隔
+
+\XeTeXlinebreakskip = 0pt plus 1pt
+\graphicspath{{./images/}}
+
+%%
+% load TEI-Pel - specific layout
+\usepackage{TeiPel_En_Beamer_Layout}  %李：這裡要用setting的文檔名，不要去改名字
+\setTeipelLayout{draft,newlogo}% options: "draft", "newlogo"
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Thesis Info %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% title
+		\title[基於網路外部性的競爭模型的平台間競爭研究]{微分方程期末報告}	
+	% author 
+    % (In the mandatory argument "{}", separate multiple
+    % authors with "\and" - use "\\" for better author name formatting
+    % in the title page. In the optional argument "[]" include all
+	% author names, with no "\and" or text formatting macros.)
+	% Example: 
+    \author[A. Author 林辰訓]{林辰訓 \and 李香儀 \and  林品妤  \and 歐陽佳琳}
+		%\author[A. Author]{Anthony Author}
+	% supervisor	
+		\supervisor{指導教授}{趙國欽}{副教授}
+	% date
+		\presentationDate{June 1, 2023}
+
+  %李：設定行距
+  \linespread{1.25}
+%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% typeset front slides
+	\typesetFrontSlides
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%
+% Your Slides Start here:
+
+%%%%%%%%%%%%%%%%第一部分
+\section{簡介}
+
+
+%%第一部分第一小節
+\subsection{論文摘要}
+%第一頁
+\begin{frame}{論文摘要}
+    這篇文章將\textbf{跨網絡外部性參數}引入到傳統的\textbf{Lotka-Volterra模型}中，從\textbf{雙邊市場平台競爭}的角度，研究\textbf{跨網絡外部性和跨平台抑制}對平台競爭均衡市場結構的影響。最後，使用改進的Lotka–Volterra模型實證分析在線外賣平台之間的關係。顯然，他們的研究與雙邊市場網絡外部性、Lotka-Volterra模型等領域的一些研究密切相關。
+
+\end{frame}
+
+
+%%第一部分第二小節
+\subsection{名詞解釋}
+
+%第二頁
+\begin{frame}{名詞解釋}
+    \begin{exampleblock}  %灰綠格子 
+		<1->{內部增長率(Internal Growth Rate)}
+  %標題與格子出現順序編碼
+  %放大會放不下
+  {\linespread{1}\small
+    \selectfont
+		指一家公司在不融資的情況下，能夠實現的最大營收增長率，通常用來評估一家公司的經營能力和發展潛力，需要考慮以下幾個因素：}
+  {\linespread{1}\small
+    \selectfont
+        \textbf{\begin{itemize}
+            \item  淨利潤率,Portfolio Margin  (pm)
+            \item  資產報酬率,Asset Return  (r)
+            \item  股東權益比率,Debt to Equity Ratio  (D/E)
+        \end{itemize}}}
+    {\linespread{1}\small
+    \selectfont
+        將內部成長率以i表示，可以將公式整理如下：}
+        {\linespread{1}\small
+    \selectfont
+        \begin{equation}
+                i = \frac{pm*r*(D/E)} {1-(pm*r*(D/E))}
+        \end{equation}}
+	\end{exampleblock}
+
+\end{frame}
+%第三頁
+\begin{frame}{名詞解釋}
+    \begin{exampleblock}  %灰綠格子 
+		<1->{雙邊市場(Two-Sided Market)}
+  %標題與格子出現順序編碼
+  {\linespread{1}\small
+    \selectfont
+		指一種交易平台，該平台通常涉及\textbf{兩個不同的用戶群體}：提供商品或服務的一方和使用者或消費者的另一方。這些平台的成功往往取決於這兩個不同用戶群體之間的\textbf{網絡效應}。在雙邊市場中，\textbf{增加任何一方的參與者，都有可能增加另一方的參與者。}}
+	\end{exampleblock}
+\end{frame}
+%第四頁
+\begin{frame}{名詞解釋}
+    \begin{exampleblock}  %灰綠格子 
+		<1->{網路外部性(Network Externality)}
+  %  https://en.wikipedia.org/wiki/Network_effect
+  %標題與格子出現順序編碼
+  {\linespread{1}\small
+    \selectfont
+		消費者選用某項商品或服務，所獲得的\textbf{效用}與「使用該商品或服務的\textbf{其他使用者人數}」\textbf{具有相關性}時，此商品或服務即被稱為具有網路外部性。}
+	\end{exampleblock}
+    \begin{exampleblock}  %灰綠格子 
+		<2->{跨網路外部性(Cross-Network Externality)}
+  {\linespread{1}\small
+    \selectfont
+		是\textbf{間接的網路外部性}，當「至少有兩個\textbf{相依}的不同客戶群體，並且至少一個群體的效用\textbf{隨著其他群體的增長而增長時}」會出現跨網路外部性。}
+	\end{exampleblock}
+\end{frame}
+
+
+
+
+
+%%%%%%%%%%%%%%%%第二部分
+\section{模型介紹}
+
+
+%%第二部分第一小節
+\subsection{Lotka–Volterra model}
+%第五頁
+\begin{frame}{Lotka–Volterra model}
+	\begin{exampleblock}
+	    <1->{Assumptions}
+     {\linespread{1}\footnotesize
+    \selectfont
+        假設一個生態系統中\textbf{只有兩類物種}，它們依賴\textbf{相同的食物}生存，並且兩類物種的規模增長遵循\textbf{logistic growth}。考慮兩物種\textbf{規模變化比率}和\textbf{種群之間的相互作用}可以建立經典的Lotka - Volterra模型。}
+	\end{exampleblock}
+		
+\end{frame}
+
+%第六頁
+\begin{frame}{Lotka–Volterra model}
+    \begin{block}
+		<1->{Model}
+    {\linespread{0.5}\footnotesize
+    \selectfont
+		\begin{align}  %加註編號用
+        \left\{  %加括號用
+        \begin{aligned}
+            \frac{dx(t)}{dt} & = & \mu_1(1-\frac{x(t)}{K_1}+\alpha\frac{y(t)}{K_2})
+        \\
+            \frac{dy(t)}{dt} & = & \mu_2(1-\frac{y(t)}{K_2}+\beta\frac{x(t)}{K_1})
+        \end{aligned}
+        \right.
+        \end{align}}
+	\end{block}	
+    \begin{exampleblock}
+	    <2->{模型解釋}
+     {\footnotesize\selectfont
+        在這個模型中，我們可以用：
+        \begin{itemize}
+            \item $\frac{x(t)}{K_1}$和$\frac{y(t)}{K_2}$考慮該環境下生物容納數量上限的對物種數量變化率的影響
+            \item $\alpha\frac{y(t)}{K_2}$和$\beta\frac{x(t)}{K_1}$考慮物種之間的交互作用。
+        \end{itemize}}
+	\end{exampleblock}	
+\end{frame}
+
+
+%第七頁
+\begin{frame}{模型之間的取捨}
+\framesubtitle{Lotka–Volterra model與效用極大化模型的特徵}
+    \begin{exampleblock}
+	    <1->{Lotka–Volterra model}
+     {\linespread{1}\footnotesize
+    \selectfont
+        主要從競爭關係的角度描述了\textbf{人口演化的長期過程}。透過該模型，我們可以揭示企業在市場競爭中的均衡狀態及其影響因素。}
+    \end{exampleblock}
+    \begin{exampleblock}
+	    <1->{效用極大化模型}
+     {\linespread{1}\footnotesize
+    \selectfont
+        常用於雙邊市場理論中，從\textbf{用戶最大化和平台利潤最大化}的角度研究平台公司的\textbf{競爭行為}，如定價策略。}
+    \end{exampleblock}
+\end{frame}
+
+%第八頁
+\begin{frame}{模型之間的取捨}
+\framesubtitle{Lotka–Volterra model與效用極大化模型之間的比較}
+    \begin{itemize}
+        \item \textcolor{teal}{\textbf{長期與短期：}}
+        \\\small\selectfont{Lotka-Volterra模型更側重於刻畫\textbf{長期}的演化特徵。用戶規模的長期增長，已經體現了平台的成本和收益。\textbf{只有當長期收益超過成本時，平台才能繼續運營。}然而，利潤最大化目標反映了一個\textbf{短期}優化問題。}
+        \item \textcolor{teal}{\textbf{生存問題與最佳化問題：}}
+        \\\small\selectfont{利潤最大化模型解決了一個\textbf{最佳化問題}，而Lotka–Volterra模型解決了一個\textbf{生存問題}。對於平台競爭等複雜系統，更適合用\textbf{生存}的視角來分析此類問題。}
+    \end{itemize}
+\end{frame}
+
+
+%%第二部分第二小節
+\subsection{建立雙平台及三平台競爭模型}
+
+%第九頁
+\begin{frame}{雙平台競爭模型}
+\framesubtitle{Duopoly competition model of bilateral platform}
+以兩物種競爭類比平台間的雙寡頭競爭時，因為是雙邊市場，所以模型會變得更為複雜，我們先簡單地以圖示呈現一部份變數之間的關聯：
+    \\
+    \begin{figure}[h]
+    \centering
+    \includegraphics[width=8cm]{photo.png}
+    \caption{雙平台模型變數圖說}
+    \end{figure}
+\end{frame}
+
+%第十頁
+\begin{frame}{雙平台競爭模型}
+\framesubtitle{Duopoly competition model of bilateral platform}
+    \begin{exampleblock}
+	    <1->{Assumptions}
+     {\linespread{1}\footnotesize\selectfont
+        \begin{itemize}
+            \item 市場上只有1和2兩個平台，沒有系統外部的干擾。平台號表示為i(i=1,2)
+            \item 競爭主要發生在平台之間
+        \end{itemize}}
+    \end{exampleblock}
+\end{frame}
+
+%第十一頁
+\begin{frame}{雙平台競爭模型}
+\framesubtitle{Duopoly competition model of bilateral platform}
+    \begin{block}
+		<1->{Model}
+            {\linespread{0.5}\footnotesize\selectfont
+		\begin{align}
+        \left\{
+            \begin{aligned}
+            \frac{dn_{1A}}{dt} & = & \mu_{1A}n_{1A}(1-\frac{n_{1A}}{N_{1A}}+r_{12}\frac{n_{2A}+n_{2B}}{N_{2A}+N_{2B}}+\theta_1\frac{n_{1B}}{N_{1B}})
+            \\
+            \frac{dn_{1B}}{dt} & = & \mu_{1B}n_{1B}(1-\frac{n_{1B}}{N_{1B}}+r_{12}\frac{n_{2A}+n_{2B}}{N_{2A}+N_{2B}}+\theta_1\frac{n_{1A}}{N_{1A}})
+            \\
+            \frac{dn_{2A}}{dt} & = & \mu_{2A}n_{2A}(1-\frac{n_{2A}}{N_{2A}}+r_{21}\frac{n_{1A}+n_{1B}}{N_{1A}+N_{1B}}+\theta_2\frac{n_{2B}}{N_{2B}})
+            \\
+            \frac{dn_{2B}}{dt} & = & \mu_{2B}n_{2B}(1-\frac{n_{2B}}{N_{2B}}+r_{21}\frac{n_{1A}+n_{1B}}{N_{1A}+N_{1B}}+\theta_2\frac{n_{2A}}{N_{2A}})
+            \end{aligned}
+        \right.
+        \end{align}}        
+    \end{block}	
+\end{frame}
+
+%第十二頁
+\begin{frame}{雙平台競爭模型}
+\framesubtitle{Duopoly competition model of bilateral platform}
+    \begin{exampleblock}
+    <1->{模型解釋}
+     {\footnotesize\selectfont
+        在這個模型中，我們可以用：
+        \begin{itemize}
+            \item $\frac{n_{1A}}{N_{1A}}$和$\frac{n_{1B}}{N_{1B}}$考慮該平台下容納用戶數量上限的對變化率的影響
+            \item $r_{12}\frac{n_{2A}+n_{2B}}{N_{2A}+N_{2B}}$和$r_{21}\frac{n_{1A}+n_{1B}}{N_{1A}+N_{1B}}$考慮平台之間的交互作用
+        \end{itemize}}
+	\end{exampleblock}	
+\end{frame}
+
+%第十三頁
+\begin{frame}{網絡外部性係數$\theta$}
+        這個模型與Lotka–Volterra model不同之處在於多出的網絡外部性影響係數$\theta$。
+        \begin{itemize}
+            \item <1->要如何解釋$\theta$？
+            {\footnotesize\selectfont
+            \\平台兩側分別有商家及顧客，當其中一方數量增加，對另一方有正向影響，這時會出現跨網路外部性。這裡以$\frac{n_{1B}}{N_{1B}}$,$\frac{n_{1A}}{N_{1A}}$,$\frac{n_{2B}}{N_{2B}}$,$\frac{n_{2A}}{N_{2A}}$來將這種影響列入模型之中。又因為兩平台的跨網絡外部性影響大小不一定相同，再分別設定$\theta_1$、$\theta_2$來表示其大小。}
+            \item <2->$\theta$的範圍
+            {\footnotesize\selectfont
+            \\$\theta_i$呈現的是平台雙邊用戶數的相關程度，且在此模型中，商家與顧客用戶數呈現正相關，因此設定0<$\theta_i$<1。}
+        \end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%第十四頁
+\begin{frame}{三平台競爭模型}
+\framesubtitle{Three-oligarch platform competition model}
+    雖然多個平台在同行業中往往競爭激烈，但我們想知道，政府或行業協會對第三方平台的積極支持，是否有利於打破現有壟斷，促進行業競爭。因此，我們將Lotka–Volterra模型從兩平台競爭模型擴展為三平台競爭模型。
+    \begin{exampleblock}
+	    <1->{Assumptions}
+     {\linespread{1}\footnotesize\selectfont
+        \begin{itemize}
+            \item 三個平台在市場上競爭，沒有來自系統外部的干擾。 平台編號用i(i= 1, 2, 3)表示。 
+            \item 競爭主要發生在平台之間
+        \end{itemize}}
+    \end{exampleblock}
+\end{frame}
+
+%第十五頁
+\begin{frame}{三平台競爭模型}
+\framesubtitle{Three-oligarch platform competition model}
+    \begin{block}
+		<1->{Model}
+            {\linespread{0.5}\tiny\selectfont
+		\begin{align}
+        \left\{
+            \begin{aligned}
+            \frac{dn_{1A}}{dt} & = & \mu_{1A}n_{1A}(1-\frac{n_{1A}}{N_{1A}}+r_{12}\frac{n_{2A}+n_{2B}}{N_{2A}+N_{2B}}+r_{13}\frac{n_{3A}+n_{3B}}{N_{3A}+N_{3B}}+\theta_1\frac{n_{1B}}{N_{1B}})
+            \\
+            \frac{dn_{1B}}{dt} & = & \mu_{1B}n_{1B}(1-\frac{n_{1B}}{N_{1B}}+r_{12}\frac{n_{2A}+n_{2B}}{N_{2A}+N_{2B}}+r_{13}\frac{n_{3A}+n_{3B}}{N_{3A}+N_{3B}}+\theta_1\frac{n_{1A}}{N_{1A}})
+            \\
+            \frac{dn_{2A}}{dt} & = & \mu_{2A}n_{2A}(1-\frac{n_{2A}}{N_{2A}}+r_{21}\frac{n_{1A}+n_{1B}}{N_{1A}+N_{1B}}+r_{23}\frac{n_{3A}+n_{3B}}{N_{3A}+N_{3B}}+\theta_2\frac{n_{2B}}{N_{2B}})
+            \\
+            \frac{dn_{2B}}{dt} & = & \mu_{2B}n_{2B}(1-\frac{n_{2B}}{N_{2B}}+r_{21}\frac{n_{1A}+n_{1B}}{N_{1A}+N_{1B}}+r_{23}\frac{n_{3A}+n_{3B}}{N_{3A}+N_{3B}}+\theta_2\frac{n_{2A}}{N_{2A}})
+            \\
+            \frac{dn_{3A}}{dt} & = & \mu_{3A}n_{3A}(1-\frac{n_{3A}}{N_{3A}}+r_{31}\frac{n_{1A}+n_{1B}}{N_{1A}+N_{1B}}+r_{32}\frac{n_{2A}+n_{2B}}{N_{2A}+N_{2B}}+\theta_3\frac{n_{2B}}{N_{2B}})
+            \\
+            \frac{dn_{3B}}{dt} & = & \mu_{3B}n_{3B}(1-\frac{n_{3B}}{N_{3B}}+r_{31}\frac{n_{1A}+n_{1B}}{N_{1A}+N_{1B}}+r_{32}\frac{n_{2A}+n_{2B}}{N_{2A}+N_{2B}}+\theta_3\frac{n_{2B}}{N_{2B}})
+            \end{aligned}
+        \right.
+        \end{align}}        
+    \end{block}	
+\end{frame}
+
+
+
+%%%%
+%第三部分
+\section{均衡結果分析}
+
+
+%%第三部分第一小節
+\subsection{雙平台均衡解}
+%第十五頁
+\begin{frame}{雙平台均衡解}
+    \begin{block}
+		<1->{第1種平衡解：其中一平台最終獨佔市場}
+            {\linespread{0.5}\footnotesize\selectfont
+		\begin{align}
+            \left\{
+            \begin{aligned}
+            \quad & n_{1A} = 0
+            \\
+            \quad & n_{1B} = 0
+            \\
+            \quad & n_{2A} = \frac{n_{2A}}{1-\theta_2}
+            \\
+            \quad & n_{2B} = \frac{n_{2B}}{1-\theta_2}
+    \end{aligned}
+    \right.
+    \end{align} }      
+    \end{block}
+\end{frame}
+
+%第十六頁
+\begin{frame}{雙平台均衡解}
+    \begin{block}
+		<1->{第2種平衡解：兩平台壟斷大多市場}
+            {\linespread{0.5}\footnotesize\selectfont
+		\begin{align}
+            \left\{
+            \begin{aligned}
+            \quad & n_{1A} = \frac{N_{1A}(1+r_{12}-\theta_2)}{1+\theta_1(\theta_2-1)-\theta_2-r_{12}r_{21}}
+            \\
+            \quad & n_{1B} = \frac{N_{1B}(1+r_{12}-\theta_2)}{1+\theta_1(\theta_2-1)-\theta_2-r_{12}r_{21}}
+            \\
+            \quad & n_{2A} = \frac{N_{2A}(1+r_{21}-\theta_1)}{1+\theta_1(\theta_2-1)-\theta_2-r_{12}r_{21}}
+            \\
+            \quad & n_{2B} = \frac{N_{2B}(1+r_{12}-\theta_1)}{1+\theta_1(\theta_2-1)-\theta_2-r_{12}r_{21}}
+    \end{aligned}
+    \right.
+    \end{align} }      
+    \end{block}
+\end{frame}
+
+
+%%第三部分第二小節
+\subsection{考慮內在增長率的影響}
+
+%第十七頁
+\begin{frame}{考慮內在增長率的影響}
+\framesubtitle{當兩個平台無影響關係時 ($r_{12}=r_{21}$=0)}
+    {\linespread{0.5}\footnotesize\selectfont
+    作為模型中的重要參數，內在成長率的大小會影響到最終的均衡結果。文章共考慮三種狀態下內在成長率的影響：\textbf{平台間無影響、完全競爭、互利}。在兩平台間無互相影響關係時，先假設其他參數如下：}
+    \begin{block}
+    <1->{Assumption}            {\linespread{0.5}\footnotesize\selectfont
+        \begin{itemize}
+		\item 兩個平台都是新建立的，沒有用戶群
+		\item $N_{1A}=N_{2A}$=1500
+		\item $N_{1B}=N_{2B}$=1000
+            \item $\mu_{1A}=\mu_{2A}$=0.4
+            \item $\mu_{1B}=\mu_{2B}$=0.2
+	\end{itemize}}
+    \end{block}
+\end{frame}
+
+%第十八頁
+\begin{frame}{考慮內在增長率的影響}
+\framesubtitle{當兩個平台無影響關係時 ($r_{12}=r_{21}$=0)}
+{\linespread{0.5}\footnotesize\selectfont
+\textbf{平臺本身的增長率雖然不影響平衡結果，但該指標會影響達到平衡狀態所需的時間。增長率越小，達到平衡所需的時間就越長。}}
+    \begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{1.png}
+    \caption{網絡外部性係數不同}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{2.png}
+    \caption{內在增長率也不同}
+    \end{minipage}
+    \end{figure}
+\end{frame}
+
+%第十九頁
+\begin{frame}{考慮內在增長率的影響}
+\framesubtitle{當兩個平台處於互利關係時 ($r_{12}>0,r_{21}>0$)}
+    {\linespread{0.5}\footnotesize\selectfont
+    作為模型中的重要參數，內在成長率的大小會影響到最終的均衡結果。文章共考慮三種狀態下內在成長率的影響：\textbf{平台間無影響、完全競爭、互利}。在兩平台間無互相影響關係時，先假設其他參數如下：}
+    \begin{block}
+    <1->{Assumption}            {\linespread{0.5}\footnotesize\selectfont
+        \begin{itemize}
+		\item 兩個平台都是新建立的，沒有用戶群
+		\item $N_{1A}=N_{2A}$=1500
+		\item $N_{1B}=N_{2B}$=1000
+            \item $\mu_{1A}=\mu_{2A}$=0.4
+            \item $\mu_{1B}=\mu_{2B}$=0.2
+	\end{itemize}}
+    \end{block}
+\end{frame}
+
+%第十八頁
+\begin{frame}{考慮內在增長率的影響}
+\framesubtitle{當兩個平台處於互利關係時 ($r_{12}>0,r_{21}>0$)}
+{\linespread{0.5}\footnotesize\selectfont
+\textbf{當兩個平台提供的產品和服務具有互補性時，兩個平台間的促進作用可能高於抑製作用。在這種情況下，平台競爭的均衡結果與之前的競爭結果相似。}}
+    \begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{3.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{4.png}
+    \end{minipage}
+    \end{figure}
+\end{frame}
+
+%第十九頁
+\begin{frame}{考慮內在增長率的影響}
+\framesubtitle{當兩個平台完全競爭時 ($r_{12}<0, r_{21}<0$)}
+    {\linespread{0.5}\footnotesize\selectfont
+    兩個平台處於完全競爭狀態，市場結構的演化將導致壟斷市場或寡頭壟斷市場。}
+    \begin{block}
+    <1->{Assumption}            {\linespread{0.5}\footnotesize\selectfont
+        \begin{itemize}
+		  \item  $\theta_1 = 0.2$
+            \item  $\theta_2 = 0.3$
+            \item  $r_{\text{min}} > -2.5$
+            \item  其餘假設同前兩個案例
+	\end{itemize}}
+    \end{block}
+\end{frame}
+
+%第二十頁
+\begin{frame}{考慮內在增長率的影響}
+\framesubtitle{當兩個平台完全競爭時 ($r_{12}<0, r_{21}<0$)}
+    \begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{5.png}
+    \caption{基準圖}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{6.png}
+    \caption{平台2的$\mu$減少}
+    \end{minipage}
+    \end{figure}
+\end{frame}
+
+%第二十一頁
+\begin{frame}{考慮內在增長率的影響}
+\framesubtitle{當兩個平台完全競爭時 ($r_{12}<0, r_{21}<0$)}
+    \begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{7.png}
+    \caption{當$\mu_{1A}$減少}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{8.png}
+    \caption{當平台1的$\mu$下降}
+    \end{minipage}
+    \end{figure}
+\end{frame}
+
+%第二十二頁
+\begin{frame}{考慮內在增長率的影響}
+\framesubtitle{當兩個平台完全競爭時 ($r_{12}<0, r_{21}<0$)}
+    {\linespread{1}\selectfont
+    綜合以上四張圖，可以做出以下結論：}
+    {\linespread{1}\selectfont
+        \begin{itemize}
+		\item 共存對應的均衡結果與內在增長率無關。但是，平台內在增長率的降低會導致平台生存區域的縮小，使得對手平台更容易壟斷市場。
+		\item 內在增長率相差較大時（平台2的增長率高於平台1），只要平台2對平台1的抑製作用大於 0.7，無論平台 1 對平台 2 的抑製作用如何，平台 2 都可以輕鬆壟斷市場。
+		\item 內在增長率對共存區幾乎沒有影響。
+            \item 流量的爭奪雖然不會長期影響共存區，但不可忽視的是，這種競爭伴隨著壟斷市場格局的風險。可以在短期內利用流量競爭，通過積累的內在增長率優勢慢慢衝擊競爭對手。
+	\end{itemize}}
+\end{frame}
+
+
+%%%%
+\section{實證分析}
+
+%第二十三頁
+\begin{frame}{實證分析}
+\framesubtitle{競爭模型}
+{\linespread{0.5}\footnotesize\selectfont
+以"餓了嗎"、"美團"這兩家外賣平台公司雙方的用戶數量為對象，採用雙寡頭競爭模型探究這兩家公司的競爭關係。可以得到如下外賣平台企業的競爭模型：}
+{\linespread{0.5}\tiny\selectfont
+		\begin{align}
+            \left\{
+            \begin{aligned}
+    \frac{dn_{1A}}{dt} & = 0.0095n_{1A}-(2.3774E-06)n^2_{1A}-(8.8169-06)n_{1A}(n_{2A}+n_{2B}) \\
+    &\quad +(1.4509E-05)n_{1a}n_{1B}
+    \\
+    \\
+    \frac{dn_{1B}}{dt} & = 0.006600n_{1B}-(1.4026E-05)n^2_{1B}-(6.1178-06)n_{1B}(n_{2A}+n_{2B}) \\
+    &\quad +(1.1841E-06)n_{1a}n_{1B}
+    \\
+    \\
+    \frac{dn_{2A}}{dt} & = 0.009672n_{2A}-(4.2257E-06)n^2_{2A}-(4.9526E-06)n_{2A}(n_{1A}+n_{1B}) \\
+    &\quad +(2.9250E-06)n_{2a}n_{2B}
+    \\
+    \\
+    \frac{dn_{2B}}{dt} & = 0.015880n_{2B}-(3.8900E-05)n^2_{2B}-(8.1310E-06)n_{2B}(n_{1A}+n_{1B}) \\
+    &\quad +(8.5643E-07)n_{2a}n_{2B}
+    \end{aligned}
+    \right.
+    \end{align} }      
+\end{frame}
+
+%第二十四頁
+\begin{frame}{實證分析}
+\framesubtitle{模擬結果}
+    \begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{9.png}
+    \caption{用戶規模初始值為0}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{10.png}
+    \caption{以2018年2月4日的數據為初值}
+    \end{minipage}
+    \end{figure}
+\end{frame}
+
+%第二十五頁
+\begin{frame}{實證分析}
+\framesubtitle{模擬結果}
+    \begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{11.png}
+    \caption{以2019年2月12日的數據為初值}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{12.png}
+    \caption{以2020年1月21日的數據為初值}
+    \end{minipage}
+    \end{figure}
+\end{frame}
+
+%%%%
+\section{總結}
+
+\begin{frame}{總結}
+	\begin{itemize}
+		\item 提出雙邊市場理論框架，引入跨網絡外部性參數
+            \item 使用改進的Lotka-Volterra模型分析平台企業的動態競爭
+            \item 考察跨網絡外部性與平台競爭均衡市場結構的關係
+            \item 擴展到三寡頭競爭模式，分析新平台進入市場的條件
+            \item 實證分析餓了麼和美團的競爭關係，考察網絡外部性的影響
+	\end{itemize}
+\end{frame}
+
+
+%%
+\end{document}
+
+%動畫示範1
+%\begin{frame}{Slide Title \#2}
+ %\framesubtitle{Slide subtitle \#1}
+	%\begin{itemize}
+		%\item Use the \texttt{itemize} environment frequently.
+		%\pause
+		%\item Use short sentences and phrases.
+		%\pause
+		%\item In this presentation we use the \textbackslash{}\texttt{pause} macro.
+	%\end{itemize}
+ %\end{frame}
+%動畫示範2：非順序提示
+ \begin{frame}{Slide Title \#2}
+	\begin{itemize}
+		\item <1->You can define the order of appearance.
+		\item <3->Like here.
+		\item <2->This is the second item to appear.
+	\end{itemize}
+\end{frame}
+
+%block example
+\begin{frame}{Slide Title \#4}
+	\begin{example}
+		<1->First example. 
+	\end{example}
+	\begin{example}
+		<2->Second example.
+	\end{example}
+\end{frame}
+
+
+%table example
+\begin{frame}{Slide Title \#5}
+	\begin{center}
+		Table example \\[12pt]
+		\begin{tabular}{c||c|c|c|}
+			& \textbf{col 1} & \textbf{col  2} & \textbf{col 3} \\
+			\hline
+			\hline
+			\textbf{row 1} & 11 & 12 & 13 \\
+			\hline
+			\textbf{row 2} & 21 & 22 & 23 \\
+		\end{tabular}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Slide Title \#6}
+	\begin{center}
+		Figure example \\[12pt]
+		\includegraphics[width=0.35\textwidth,keepaspectratio]{LampFlowchart.png}
+		\\
+		\footnotesize(source: \textlatin{Wikipedia})
+    \end{center}
+\end{frame}
+
+\begin{frame}{Slide Title \#7}
+	\centering
+	Math examples \\[12pt]
+	\begin{equation}
+        	B'=-\nabla \times E
+	\end{equation}
+	\begin{equation*}
+        	E'=\nabla \times B - 4\pi j
+	\end{equation*}
+\end{frame}
+
+%alert box
+\begin{frame}{Summary}
+   	\begin{alertblock}{Attention}
+   		\textlatin{This is an important alert}
+   	\end{alertblock}
+\end{frame}
+
+
+%references
+\begin{frame}{References}
+	\begin{thebibliography}{2}
+		\beamertemplatebookbibitems
+		\bibitem{Author1990}A.\ Author. \newblock\emph{Handbook of Everything}.\newblock
+\textlatin{Some Press, \oldstylenums{1990}}.
+
+		\beamertemplatearticlebibitems
+		\bibitem{Someone2002}B.\ Author.\newblock On this and that\emph{.}
+\newblock\emph{Journal on This and That}. 
+\oldstylenums{2}(\oldstylenums{1}):\oldstylenums{50}--\oldstylenums{100}, 
+\oldstylenums{2000}.
+	\end{thebibliography}
+\end{frame}
