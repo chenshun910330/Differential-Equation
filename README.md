@@ -1,5 +1,6 @@
 # 平台競爭動態模型分析：基於 Lotka–Volterra 模型
 > **Differential Equations Course Project | Junior Year (3rd Year)**
+[📄 點此閱讀完整研究報告 (PDF)](<有限集合上遞移關係數量的計數問題 (Transitive Relations Counting).pdf>)
 
 這是我在大三「微分方程」課程中，與同學合作完成的研究作品。本計畫根據教授要求，從學術期刊中選取與微分方程相關的論文進行深入研究，並分析其數學模型在現實商業環境中的應用與預測能力。
 
